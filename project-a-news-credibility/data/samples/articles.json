@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "article_id": "sample-001",
+      "title": "정부, 내년 최저임금 동결 검토",
+      "source": "example-news",
+      "url": "https://example.com/news/sample-001",
+      "published_at": "2026-08-11T10:00:00Z",
+      "content": "정부가 내년 최저임금을 동결하는 방안을 검토 중이라고 복수의 관계자가 전했다. 관련 부처는 공식 입장을 아직 밝히지 않았다."
+    },
+    {
+      "article_id": "sample-002",
+      "title": "신약 임상 3상 성공, 주가 급등",
+      "source": "market-wire",
+      "url": "https://example.com/news/sample-002",
+      "published_at": "2026-08-11T10:05:00Z",
+      "content": "A사는 신약 임상 3상에서 유의미한 효과를 확인했다고 밝혔다. 독립 검증 결과는 공개되지 않았다."
+    }
+  ]
+}
