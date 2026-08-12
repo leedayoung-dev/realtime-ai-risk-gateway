@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "user_id": "user_1001",
+      "account_age_days": 3,
+      "transaction_count": 1,
+      "report_count": 2,
+      "listings": [
+        {"listing_id": "L1", "price": 50000, "category_avg_price": 180000, "title": "아이폰 거의 새것"},
+        {"listing_id": "L2", "price": 45000, "category_avg_price": 180000, "title": "아이폰 거의 새것"},
+        {"listing_id": "L3", "price": 48000, "category_avg_price": 175000, "title": "아이폰 거의 새것"}
+      ],
+      "behavior": {
+        "messages_per_5m": 28,
+        "listing_burst": 3,
+        "new_users_contacted": 12,
+        "external_contact_attempt": 4
+      },
+      "network": {"connected_users": ["user_2001", "user_2002", "user_2003", "user_2004"]},
+      "label_hint": "high_risk"
+    },
+    {
+      "user_id": "user_1002",
+      "account_age_days": 420,
+      "transaction_count": 37,
+      "report_count": 0,
+      "listings": [
+        {"listing_id": "L9", "price": 120000, "category_avg_price": 115000, "title": "중고 노트북"}
+      ],
+      "behavior": {
+        "messages_per_5m": 3,
+        "listing_burst": 0,
+        "new_users_contacted": 1,
+        "external_contact_attempt": 0
+      },
+      "network": {"connected_users": ["user_3001"]},
+      "label_hint": "low_risk"
+    },
+    {
+      "user_id": "user_1003",
+      "account_age_days": 5,
+      "transaction_count": 0,
+      "report_count": 1,
+      "listings": [
+        {"listing_id": "L10", "price": 30000, "category_avg_price": 220000, "title": "갤럭시 미개봉"},
+        {"listing_id": "L11", "price": 32000, "category_avg_price": 220000, "title": "갤럭시 미개봉"},
+        {"listing_id": "L12", "price": 31000, "category_avg_price": 210000, "title": "갤럭시 미개봉"},
+        {"listing_id": "L13", "price": 29000, "category_avg_price": 210000, "title": "갤럭시 미개봉"}
+      ],
+      "behavior": {
+        "messages_per_5m": 40,
+        "listing_burst": 4,
+        "new_users_contacted": 20,
+        "external_contact_attempt": 7
+      },
+      "network": {"connected_users": ["user_2001", "user_2005", "user_2006", "user_2007", "user_2008"]},
+      "label_hint": "high_risk"
+    },
+    {
+      "user_id": "user_1004",
+      "account_age_days": 200,
+      "transaction_count": 18,
+      "report_count": 0,
+      "listings": [
+        {"listing_id": "L20", "price": 85000, "category_avg_price": 90000, "title": "무선 이어폰"}
+      ],
+      "behavior": {
+        "messages_per_5m": 5,
+        "listing_burst": 0,
+        "new_users_contacted": 2,
+        "external_contact_attempt": 0
+      },
+      "network": {"connected_users": ["user_3010", "user_3011"]},
+      "label_hint": "low_risk"
+    },
+    {
+      "user_id": "user_1005",
+      "account_age_days": 14,
+      "transaction_count": 2,
+      "report_count": 1,
+      "listings": [
+        {"listing_id": "L30", "price": 70000, "category_avg_price": 150000, "title": "카메라 급처"},
+        {"listing_id": "L31", "price": 65000, "category_avg_price": 150000, "title": "카메라 급처"}
+      ],
+      "behavior": {
+        "messages_per_5m": 16,
+        "listing_burst": 2,
+        "new_users_contacted": 8,
+        "external_contact_attempt": 2
+      },
+      "network": {"connected_users": ["user_2010", "user_2011", "user_2012"]},
+      "label_hint": "high_risk"
+    },
+    {
+      "user_id": "user_1006",
+      "account_age_days": 600,
+      "transaction_count": 55,
+      "report_count": 0,
+      "listings": [
+        {"listing_id": "L40", "price": 250000, "category_avg_price": 240000, "title": "모니터 27인치"}
+      ],
+      "behavior": {
+        "messages_per_5m": 2,
+        "listing_burst": 0,
+        "new_users_contacted": 1,
+        "external_contact_attempt": 0
+      },
+      "network": {"connected_users": ["user_3020"]},
+      "label_hint": "low_risk"
+    }
+  ]
+}

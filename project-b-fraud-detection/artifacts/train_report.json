@@ -1,0 +1,31 @@
+{
+  "n_samples": 10,
+  "samples": [
+    "user_1001",
+    "user_1002",
+    "user_1003",
+    "user_1004",
+    "user_1005",
+    "user_1006",
+    "synth-h1",
+    "synth-h2",
+    "synth-l1",
+    "synth-l2"
+  ],
+  "supervised_mae_train": 0.075,
+  "supervised_model_path": "artifacts/supervised_model.joblib",
+  "anomaly_model_path": "artifacts/anomaly_model.joblib",
+  "feature_keys": [
+    "account_age_days",
+    "transaction_count",
+    "report_count",
+    "listing_frequency",
+    "price_deviation",
+    "duplicate_listing_ratio",
+    "messages_per_5m",
+    "listing_burst",
+    "new_users_contacted",
+    "external_contact_attempt",
+    "network_degree"
+  ]
+}

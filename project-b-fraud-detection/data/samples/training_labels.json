@@ -1,0 +1,82 @@
+{
+  "samples": [
+    {"user_id": "user_1001", "label": 1, "label_risk": 92},
+    {"user_id": "user_1002", "label": 0, "label_risk": 8},
+    {"user_id": "user_1003", "label": 1, "label_risk": 95},
+    {"user_id": "user_1004", "label": 0, "label_risk": 12},
+    {"user_id": "user_1005", "label": 1, "label_risk": 78},
+    {"user_id": "user_1006", "label": 0, "label_risk": 6},
+    {
+      "user_id": "synth-h1",
+      "label": 1,
+      "label_risk": 90,
+      "features": {
+        "account_age_days": 2,
+        "transaction_count": 0,
+        "report_count": 3,
+        "listing_frequency": 5,
+        "price_deviation": 0.75,
+        "duplicate_listing_ratio": 0.8,
+        "messages_per_5m": 35,
+        "listing_burst": 4,
+        "new_users_contacted": 15,
+        "external_contact_attempt": 5,
+        "network_degree": 8
+      }
+    },
+    {
+      "user_id": "synth-h2",
+      "label": 1,
+      "label_risk": 85,
+      "features": {
+        "account_age_days": 6,
+        "transaction_count": 1,
+        "report_count": 2,
+        "listing_frequency": 4,
+        "price_deviation": 0.6,
+        "duplicate_listing_ratio": 0.7,
+        "messages_per_5m": 22,
+        "listing_burst": 3,
+        "new_users_contacted": 10,
+        "external_contact_attempt": 3,
+        "network_degree": 6
+      }
+    },
+    {
+      "user_id": "synth-l1",
+      "label": 0,
+      "label_risk": 10,
+      "features": {
+        "account_age_days": 400,
+        "transaction_count": 30,
+        "report_count": 0,
+        "listing_frequency": 1,
+        "price_deviation": 0.05,
+        "duplicate_listing_ratio": 0.0,
+        "messages_per_5m": 2,
+        "listing_burst": 0,
+        "new_users_contacted": 1,
+        "external_contact_attempt": 0,
+        "network_degree": 2
+      }
+    },
+    {
+      "user_id": "synth-l2",
+      "label": 0,
+      "label_risk": 15,
+      "features": {
+        "account_age_days": 250,
+        "transaction_count": 22,
+        "report_count": 0,
+        "listing_frequency": 2,
+        "price_deviation": 0.12,
+        "duplicate_listing_ratio": 0.0,
+        "messages_per_5m": 4,
+        "listing_burst": 0,
+        "new_users_contacted": 2,
+        "external_contact_attempt": 0,
+        "network_degree": 3
+      }
+    }
+  ]
+}
