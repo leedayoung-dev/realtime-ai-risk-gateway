@@ -1,0 +1,16 @@
+{
+  "prompts": [
+    {
+      "prompt_id": "p-simple",
+      "text": "오늘 서울 날씨 한 줄로 알려줘"
+    },
+    {
+      "prompt_id": "p-complex",
+      "text": "실시간 사기 탐지 시스템에서 supervised와 anomaly detection을 비교할 때 평가 지표와 실험 설계를 단계별로 설명해줘. 근거도 포함해."
+    },
+    {
+      "prompt_id": "p-long",
+      "text": "다음 문서를 요약해줘. "
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+from datetime import datetime, timezone
+from enum import Enum
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+class ThreatCategory(str, Enum):
+    NORMAL = "normal"
+    DIRECT_INJECTION = "direct_injection"
+    SYSTEM_PROMPT_EXTRACTION = "system_prompt_extraction"
+    JAILBREAK = "jailbreak"
+    PII = "pii"
+    CREDENTIAL = "credential"
+    INDIRECT_INJECTION = "indirect_injection"
+
+
+class PolicyAction(str, Enum):
+    ALLOW = "allow"
+    REVIEW = "review"
+    BLOCK = "block"
+    MASK = "mask"
+
+
+class SamplePrompt(BaseModel):
+    sample_id: str
+    category: ThreatCategory
+    text: str
+
+
+class LayerScore(BaseModel):
+    layer: str
+    score: float
+    labels: list[str] = Field(default_factory=list)
+
+
+class DlpFinding(BaseModel):
+    kind: str
+    value: str
+    action: PolicyAction
+
+
+class InspectionResult(BaseModel):
+    text: str
+    risk_score: float
+    layers: list[LayerScore]
+    dlp_findings: list[DlpFinding] = Field(default_factory=list)
+    action: PolicyAction
+    masked_text: Optional[str] = None
+    reasons: list[str] = Field(default_factory=list)
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class GuardRequest(BaseModel):
+    user_id: str = "anonymous"
+    prompt: str
+    output: Optional[str] = None
+
+
+class GuardResponse(BaseModel):
+    input_inspection: InspectionResult
+    output_inspection: Optional[InspectionResult] = None
+    final_action: PolicyAction
+    safe_prompt: Optional[str] = None
+    safe_output: Optional[str] = None
