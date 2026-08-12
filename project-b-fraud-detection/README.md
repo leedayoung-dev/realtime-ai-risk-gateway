@@ -12,6 +12,7 @@ PRD: [PRD-fraud-detection.md](./PRD-fraud-detection.md)
 | M2 | Feature Store | Done |
 | M3 | Supervised + Anomaly 모델 비교 | Done |
 | M4 | Dashboard + Eval | Done |
+| M5 | High-risk → Project C Insights push | Done |
 
 ## Quick Start
 

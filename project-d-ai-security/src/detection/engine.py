@@ -42,10 +42,24 @@ def rule_score(text: str) -> LayerScore:
 
 
 def ml_score(text: str) -> LayerScore:
-    """Lightweight lexical proxy for ML classifier (M3 will replace)."""
-    tokens = ["무시", "override", "bypass", "탈취", "유출", "비밀번호", "api key"]
-    hits = [t for t in tokens if t.lower() in text.lower()]
-    score = min(95.0, 20.0 * len(hits))
+    """Lightweight lexical proxy for ML classifier."""
+    tokens = [
+        "무시",
+        "override",
+        "bypass",
+        "탈취",
+        "유출",
+        "비밀번호",
+        "api key",
+        "api_key",
+        "jailbreak",
+        "hidden prompt",
+        "시스템 설정",
+        "내부 지시",
+    ]
+    lower = text.lower()
+    hits = [t for t in tokens if t.lower() in lower]
+    score = min(95.0, 22.0 * len(hits))
     return LayerScore(layer="ml", score=score, labels=hits)
 
 

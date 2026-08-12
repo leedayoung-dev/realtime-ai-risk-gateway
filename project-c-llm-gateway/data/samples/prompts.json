@@ -5,8 +5,16 @@
       "text": "오늘 서울 날씨 한 줄로 알려줘"
     },
     {
+      "prompt_id": "p-simple-2",
+      "text": "1+1은?"
+    },
+    {
       "prompt_id": "p-complex",
       "text": "실시간 사기 탐지 시스템에서 supervised와 anomaly detection을 비교할 때 평가 지표와 실험 설계를 단계별로 설명해줘. 근거도 포함해."
+    },
+    {
+      "prompt_id": "p-complex-2",
+      "text": "LLM 게이트웨이 라우팅 정책을 설계할 때 latency와 cost를 어떻게 균형 잡을지 비교 분석해줘. 아키텍처 근거 포함."
     },
     {
       "prompt_id": "p-long",

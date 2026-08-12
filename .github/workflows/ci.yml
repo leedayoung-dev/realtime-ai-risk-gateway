@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - project-a-news-credibility
+          - project-b-fraud-detection
+          - project-c-llm-gateway
+          - project-d-ai-security
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: ${{ matrix.project }}/requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Train models (A/B)
+        if: matrix.project == 'project-a-news-credibility' || matrix.project == 'project-b-fraud-detection'
+        run: |
+          if [ -f scripts/train_risk_model.py ]; then PYTHONPATH=. python scripts/train_risk_model.py; fi
+          if [ -f scripts/train_fraud_models.py ]; then PYTHONPATH=. python scripts/train_fraud_models.py; fi
+      - name: Run pytest
+        env:
+          SECURITY_ENABLED: "false"
+          INSIGHT_PUSH_ENABLED: "false"
+        run: PYTHONPATH=. pytest -q

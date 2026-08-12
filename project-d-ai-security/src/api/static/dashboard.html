@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security Center</title>
+  <style>
+    :root {
+      --bg: #0b1220; --panel: #121a2b; --line: #243149; --text: #e8eef9;
+      --muted: #8fa3c1; --accent: #5b8cff; --ok: #5bd6a2; --warn: #f0c24b; --danger: #ff7b7b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; color: var(--text);
+      font-family: "IBM Plex Sans", "Noto Sans KR", sans-serif;
+      background: radial-gradient(1000px 500px at 100% -10%, #3a1a2b 0%, transparent 50%),
+                  radial-gradient(900px 480px at 0% -10%, #1a2b55 0%, transparent 55%), var(--bg);
+      min-height: 100vh;
+    }
+    header { padding: 28px 32px 12px; border-bottom: 1px solid var(--line); }
+    header h1 { margin: 0; font-size: 1.3rem; }
+    header p { margin: 8px 0 0; color: var(--muted); }
+    .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 16px 32px 0; }
+    .metric, .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+    .metric { padding: 12px; }
+    .metric .label { color: var(--muted); font-size: 0.75rem; }
+    .metric .value { font-size: 1.25rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    main { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 16px; padding: 16px 32px 40px; }
+    .panel { padding: 16px; }
+    h2 { margin: 0 0 12px; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.07em; text-transform: uppercase; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 0.72rem; }
+    button { background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-right: 8px; margin-bottom: 6px; }
+    button.primary { background: var(--accent); color: #071224; border-color: var(--accent); font-weight: 700; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; margin: 0 6px 6px 0; font-size: 0.72rem; color: var(--muted); }
+    .pill.hot { color: var(--danger); }
+    .pill.warn { color: var(--warn); }
+    .pill.ok { color: var(--ok); }
+    pre { background: #080e1a; border: 1px solid var(--line); border-radius: 8px; padding: 12px; white-space: pre-wrap; font-size: 0.78rem; max-height: 240px; overflow: auto; }
+    .muted { color: var(--muted); }
+    textarea, input[type=text], select {
+      width: 100%; background: #080e1a; color: var(--text);
+      border: 1px solid var(--line); border-radius: 8px; padding: 10px; margin-bottom: 8px;
+    }
+    @media (max-width: 980px) { main, .metrics { grid-template-columns: 1fr; padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Security Center</h1>
+    <p>Prompt Security · DLP · Agent Tool Policy · Defense Experiments — Project D</p>
+  </header>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">Requests</div><div class="value" id="m-req">-</div></div>
+    <div class="metric"><div class="label">Block Rate</div><div class="value" id="m-block">-</div></div>
+    <div class="metric"><div class="label">Injection-like</div><div class="value" id="m-inj">-</div></div>
+    <div class="metric"><div class="label">PII / Cred</div><div class="value" id="m-dlp">-</div></div>
+    <div class="metric"><div class="label">Agent Blocked</div><div class="value" id="m-agent">-</div></div>
+  </div>
+
+  <main>
+    <section class="panel">
+      <div style="margin-bottom:12px;">
+        <button class="primary" id="btn-refresh">Refresh</button>
+        <button id="btn-seed">Seed Prompts</button>
+        <button id="btn-agent-seed">Seed Agent Calls</button>
+        <button id="btn-exp">Defense Experiments</button>
+        <a class="muted" href="/docs" style="float:right;margin-top:8px;">API Docs</a>
+      </div>
+      <h2>Recent Events</h2>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>User/Tool</th><th>Action</th><th>Risk</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <h2 style="margin-top:18px;">User Risk Profile</h2>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" id="uid" value="alice" style="flex:1;margin-bottom:0;" />
+        <button id="btn-profile">Load</button>
+      </div>
+      <pre id="profile">사용자 ID를 조회하세요.</pre>
+    </section>
+
+    <section class="panel">
+      <h2>Layers & Agent Policy</h2>
+      <div id="layers" class="muted">loading...</div>
+      <h2 style="margin-top:18px;">Defense Experiment</h2>
+      <pre id="exp">Run Defense Experiments to compare baseline / rule / ml / judge / full.</pre>
+      <h2 style="margin-top:18px;">Try Prompt Guard</h2>
+      <input type="text" id="g-uid" value="demo" placeholder="user_id" />
+      <textarea id="prompt" rows="3" placeholder="프롬프트 입력"></textarea>
+      <button class="primary" id="btn-guard">Guard</button>
+      <pre id="guard-out"> </pre>
+      <h2 style="margin-top:18px;">Try Agent Tool Guard</h2>
+      <select id="tool">
+        <option value="search">search</option>
+        <option value="db_read">db_read</option>
+        <option value="db_write">db_write</option>
+        <option value="file_read">file_read</option>
+        <option value="file_write">file_write</option>
+        <option value="email">email</option>
+        <option value="external_api">external_api</option>
+      </select>
+      <textarea id="args" rows="4" placeholder='{"query":"서울 날씨"}'></textarea>
+      <button class="primary" id="btn-agent">Guard Tool Call</button>
+      <pre id="agent-out"> </pre>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    $("args").value = '{"query":"서울 날씨"}';
+
+    function actionPill(a) {
+      if (a === "block") return '<span class="pill hot">block</span>';
+      if (a === "mask") return '<span class="pill warn">mask</span>';
+      if (a === "review") return '<span class="pill warn">review</span>';
+      return '<span class="pill ok">allow</span>';
+    }
+
+    async function loadOverview() {
+      const data = await (await fetch("/v1/dashboard/overview")).json();
+      const live = data.live || {};
+      $("m-req").textContent = live.request_count ?? 0;
+      $("m-block").textContent = Math.round((live.block_rate || 0) * 100) + "%";
+      $("m-inj").textContent = live.prompt_injection_like ?? 0;
+      $("m-dlp").textContent = (live.pii_exposure || 0) + " / " + (live.credential_leak || 0);
+      $("m-agent").textContent = (live.agent_blocked || 0) + "/" + (live.agent_calls || 0);
+
+      $("layers").innerHTML =
+        (data.layers || []).map(l => `<span class="pill ok">${l}</span>`).join("") +
+        (data.agent_policy || []).map(p =>
+          `<span class="pill ${p.permission === "block" ? "hot" : p.permission === "allow" ? "ok" : "warn"}">${p.tool}: ${p.permission}</span>`
+        ).join("");
+
+      const body = $("tbody");
+      body.innerHTML = "";
+      (data.recent || []).forEach(row => {
+        const tr = document.createElement("tr");
+        const who = row.event_type === "agent"
+          ? `${row.tool || "-"}`
+          : row.user_id;
+        tr.innerHTML = `
+          <td>${row.event_type || "prompt"}</td>
+          <td>${who}</td>
+          <td>${actionPill(row.final_action)}</td>
+          <td>${row.risk_score}</td>`;
+        body.appendChild(tr);
+      });
+    }
+
+    $("btn-refresh").onclick = loadOverview;
+    $("btn-seed").onclick = async () => {
+      await fetch("/v1/demo/seed", { method: "POST" });
+      await loadOverview();
+    };
+    $("btn-agent-seed").onclick = async () => {
+      const res = await (await fetch("/v1/agent/demo/seed", { method: "POST" })).json();
+      $("agent-out").textContent = JSON.stringify(res.results?.map(r => ({
+        tool: r.call?.tool, action: r.action, allowed: r.allowed, risk: r.risk_score
+      })), null, 2);
+      await loadOverview();
+    };
+    $("btn-exp").onclick = async () => {
+      const report = await (await fetch("/v1/experiments/defense")).json();
+      const lines = (report.layers || []).map(l =>
+        `${l.layer.padEnd(12)} ASR=${l.attack_success_rate}  detect=${l.detection_rate}  FPR=${l.false_positive_rate}`
+      );
+      $("exp").textContent = `best=${report.best_layer}\n\n` + lines.join("\n");
+    };
+    $("btn-profile").onclick = async () => {
+      const uid = $("uid").value.trim() || "alice";
+      const p = await (await fetch(`/v1/users/${encodeURIComponent(uid)}/risk`)).json();
+      $("profile").textContent = JSON.stringify(p, null, 2);
+    };
+    $("btn-guard").onclick = async () => {
+      const body = {
+        user_id: $("g-uid").value.trim() || "demo",
+        prompt: $("prompt").value
+      };
+      const res = await (await fetch("/v1/guard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      })).json();
+      $("guard-out").textContent = JSON.stringify({
+        final_action: res.final_action,
+        risk: res.input_inspection?.risk_score,
+        reasons: res.input_inspection?.reasons,
+        safe_prompt: res.safe_prompt
+      }, null, 2);
+      await loadOverview();
+    };
+    $("btn-agent").onclick = async () => {
+      let arguments;
+      try { arguments = JSON.parse($("args").value || "{}"); }
+      catch (e) { $("agent-out").textContent = "JSON args 파싱 실패"; return; }
+      const body = {
+        user_id: "agent-ui",
+        call: { tool: $("tool").value, arguments, call_id: "ui-1" }
+      };
+      const res = await (await fetch("/v1/agent/guard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      })).json();
+      $("agent-out").textContent = JSON.stringify(res, null, 2);
+      await loadOverview();
+    };
+
+    loadOverview();
+  </script>
+</body>
+</html>

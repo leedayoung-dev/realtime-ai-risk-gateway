@@ -1,4 +1,4 @@
-"""News collector — load articles and publish to Kafka (A-F-01)."""
+"""News collector — samples / RSS publish helpers (A-F-01)."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from pathlib import Path
 
 from src.config import settings
 from src.models import Article
+from src.streaming.bus import publish_many
 
 logger = logging.getLogger(__name__)
 
@@ -19,41 +20,22 @@ def load_sample_articles(path: str | None = None) -> list[Article]:
     return [Article.model_validate(item) for item in payload["articles"]]
 
 
-def publish_articles(articles: list[Article], dry_run: bool = False) -> int:
-    """Publish articles to Kafka. Falls back to dry-run logging if broker is unavailable."""
-    topic = settings.kafka_news_topic
+def publish_articles(articles: list[Article], dry_run: bool = False) -> dict:
     if dry_run:
         for article in articles:
-            logger.info("[dry-run] %s -> %s", topic, article.article_id)
-        return len(articles)
+            logger.info("[dry-run] -> %s", article.article_id)
+        return {"published": len(articles), "backends": {"dry-run": len(articles)}}
+    from src.store.registry import upsert_many
 
-    try:
-        from kafka import KafkaProducer
-    except ImportError as exc:
-        raise RuntimeError("kafka-python is required") from exc
-
-    producer = KafkaProducer(
-        bootstrap_servers=settings.kafka_bootstrap_servers,
-        value_serializer=lambda v: json.dumps(v, default=str).encode("utf-8"),
-    )
-    try:
-        for article in articles:
-            producer.send(topic, article.model_dump(mode="json"))
-        producer.flush()
-    finally:
-        producer.close()
-    return len(articles)
+    upsert_many(articles)
+    return publish_many(articles)
 
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     articles = load_sample_articles()
-    try:
-        count = publish_articles(articles, dry_run=False)
-        logger.info("Published %s articles to %s", count, settings.kafka_news_topic)
-    except Exception as exc:  # noqa: BLE001 — M1 stub: allow local run without Kafka
-        logger.warning("Kafka publish failed (%s). Running dry-run.", exc)
-        publish_articles(articles, dry_run=True)
+    result = publish_articles(articles)
+    logger.info("Published: %s", result)
 
 
 if __name__ == "__main__":

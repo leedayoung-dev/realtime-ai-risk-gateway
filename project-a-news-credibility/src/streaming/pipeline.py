@@ -1,8 +1,4 @@
-"""Streaming pipeline skeleton (A-F-02).
-
-M1 uses a lightweight consumer loop. PySpark Structured Streaming
-can replace this module in a later milestone without changing domain contracts.
-"""
+"""Streaming pipeline — consume articles and run credibility analysis."""
 
 from __future__ import annotations
 
@@ -12,26 +8,40 @@ from collections.abc import Callable
 from typing import Any
 
 from src.config import settings
-from src.models import Article
+from src.models import Article, ArticleAnalysis
+from src.pipeline.analyze import analyze_article
+from src.store.registry import save_analysis, upsert_article
+from src.streaming.bus import consume_local
 
 logger = logging.getLogger(__name__)
 
-ArticleHandler = Callable[[Article], None]
+ArticleHandler = Callable[[Article], ArticleAnalysis | None]
 
 
 def process_article(article: Article, handler: ArticleHandler | None = None) -> dict[str, Any]:
-    """Single-article processing hook used by streaming and local tests."""
+    upsert_article(article)
     if handler:
-        handler(article)
+        analysis = handler(article)
+    else:
+        analysis = analyze_article(article)
+        save_analysis(analysis)
+
     return {
         "article_id": article.article_id,
-        "status": "accepted",
+        "status": "analyzed",
         "source": article.source,
+        "risk_score": None if analysis is None else analysis.risk.risk_score,
     }
 
 
+def run_local_batch(max_messages: int | None = None) -> dict[str, Any]:
+    articles = consume_local(max_messages=max_messages)
+    results = [process_article(article) for article in articles]
+    return {"processed": len(results), "results": results}
+
+
 def run_consumer(handler: ArticleHandler | None = None, max_messages: int | None = None) -> int:
-    """Consume raw news events from Kafka and invoke the processing hook."""
+    """Consume raw news events from Kafka and invoke analysis."""
     try:
         from kafka import KafkaConsumer
     except ImportError as exc:
@@ -42,6 +52,7 @@ def run_consumer(handler: ArticleHandler | None = None, max_messages: int | None
         bootstrap_servers=settings.kafka_bootstrap_servers,
         auto_offset_reset="earliest",
         enable_auto_commit=True,
+        consumer_timeout_ms=3000,
         value_deserializer=lambda v: json.loads(v.decode("utf-8")),
     )
 
@@ -61,4 +72,9 @@ def run_consumer(handler: ArticleHandler | None = None, max_messages: int | None
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-    run_consumer(max_messages=10)
+    # Prefer local batch if Kafka is down
+    local = run_local_batch()
+    if local["processed"]:
+        logger.info("Local batch: %s", local)
+    else:
+        run_consumer(max_messages=10)

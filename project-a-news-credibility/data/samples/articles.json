@@ -6,7 +6,10 @@
       "source": "example-news",
       "url": "https://example.com/news/sample-001",
       "published_at": "2026-08-11T10:00:00Z",
-      "content": "정부가 내년 최저임금을 동결하는 방안을 검토 중이라고 복수의 관계자가 전했다. 관련 부처는 공식 입장을 아직 밝히지 않았다."
+      "content": "정부가 내년 최저임금을 동결하는 방안을 검토 중이라고 복수의 관계자가 전했다. 관련 부처는 공식 입장을 아직 밝히지 않았다. 일각에서는 동결 시 저소득층 타격이 클 것이라고 주장했다.",
+      "share_count": 420,
+      "share_delta_1m": 35,
+      "share_delta_5m": 180
     },
     {
       "article_id": "sample-002",
@@ -14,7 +17,43 @@
       "source": "market-wire",
       "url": "https://example.com/news/sample-002",
       "published_at": "2026-08-11T10:05:00Z",
-      "content": "A사는 신약 임상 3상에서 유의미한 효과를 확인했다고 밝혔다. 독립 검증 결과는 공개되지 않았다."
+      "content": "A사는 신약 임상 3상에서 유의미한 효과를 확인했다고 밝혔다. 독립 검증 결과는 공개되지 않았다. 회사 측은 연내 허가 신청이 가능하다고 설명했다.",
+      "share_count": 980,
+      "share_delta_1m": 120,
+      "share_delta_5m": 510
+    },
+    {
+      "article_id": "sample-003",
+      "title": "서울시, 대중교통 요금 동결 공식 발표",
+      "source": "official-wire",
+      "url": "https://example.com/news/sample-003",
+      "published_at": "2026-08-11T09:30:00Z",
+      "content": "서울시는 내년 대중교통 요금을 동결한다고 공식 발표했다. 시 교통본부 보도자료에 따르면 예산 재원으로 인상분을 보전한다.",
+      "share_count": 150,
+      "share_delta_1m": 4,
+      "share_delta_5m": 18
+    },
+    {
+      "article_id": "sample-004",
+      "title": "수도권 대형 정전, 출근길 마비 임박",
+      "source": "market-wire",
+      "url": "https://example.com/news/sample-004",
+      "published_at": "2026-08-11T07:10:00Z",
+      "content": "익명의 제보에 따르면 수도권 전역에서 대형 정전이 수 시간 내 발생한다고 주장했다. 전력 당국은 관련 사실을 확인하지 못했다고 밝혔다. 소셜 미디어 공유가 급증하고 있다.",
+      "share_count": 5200,
+      "share_delta_1m": 260,
+      "share_delta_5m": 1400
+    },
+    {
+      "article_id": "sample-005",
+      "title": "코스피, 외국인 순매수에 소폭 상승",
+      "source": "example-news",
+      "url": "https://example.com/news/sample-005",
+      "published_at": "2026-08-11T06:40:00Z",
+      "content": "코스피가 외국인 순매수세에 힘입어 소폭 상승 마감했다고 증권가 집계가 전했다. 자세한 업종별 수급은 거래소 공식 통계를 확인해야 한다.",
+      "share_count": 90,
+      "share_delta_1m": 2,
+      "share_delta_5m": 9
     }
   ]
 }

@@ -11,6 +11,7 @@ from src.evaluation.compare import EvalReport, evaluate_models
 from src.features.engineering import build_features
 from src.features.store import get_features as get_stored_features
 from src.ingest.event_publisher import load_sample_users
+from src.insights.client import maybe_push_insight
 from src.models import FraudRisk, ModelComparison
 from src.models_ml.scorers import model_status, score_supervised
 from src.risk.service import compare_models
@@ -78,7 +79,9 @@ def compare_risk(user_id: str) -> ModelComparison:
     user = _USERS.get(user_id)
     if user is None:
         raise HTTPException(status_code=404, detail="user not found")
-    return compare_models(build_features(user), persist=True)
+    result = compare_models(build_features(user), persist=True)
+    maybe_push_insight(result, user_id=user_id, label_hint=user.label_hint)
+    return result
 
 
 @app.get("/v1/evaluation/compare", response_model=EvalReport)

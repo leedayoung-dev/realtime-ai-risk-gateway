@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "article_id": "sample-001",
+      "needs_verification": true,
+      "published_at": "2026-08-11T10:00:00Z",
+      "factcheck_at": "2026-08-11T12:30:00Z",
+      "detection_threshold": 50
+    },
+    {
+      "article_id": "sample-002",
+      "needs_verification": true,
+      "published_at": "2026-08-11T10:05:00Z",
+      "factcheck_at": "2026-08-11T14:00:00Z",
+      "detection_threshold": 50
+    },
+    {
+      "article_id": "sample-003",
+      "needs_verification": false,
+      "published_at": "2026-08-11T09:30:00Z",
+      "factcheck_at": null,
+      "detection_threshold": 50
+    },
+    {
+      "article_id": "sample-004",
+      "needs_verification": true,
+      "published_at": "2026-08-11T07:10:00Z",
+      "factcheck_at": "2026-08-11T11:00:00Z",
+      "detection_threshold": 50
+    },
+    {
+      "article_id": "sample-005",
+      "needs_verification": false,
+      "published_at": "2026-08-11T06:40:00Z",
+      "factcheck_at": null,
+      "detection_threshold": 50
+    }
+  ]
+}

@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Trained model binaries (regenerate via scripts/train_*.py)
+*.joblib

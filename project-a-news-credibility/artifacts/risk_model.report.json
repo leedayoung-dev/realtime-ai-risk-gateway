@@ -1,0 +1,32 @@
+{
+  "model_path": "artifacts/risk_model.joblib",
+  "n_samples": 10,
+  "feature_keys": [
+    "claim_count",
+    "avg_claim_confidence",
+    "evidence_supporting",
+    "evidence_contradicting",
+    "evidence_official",
+    "evidence_matched",
+    "avg_evidence_relevance",
+    "content_length",
+    "source_trust",
+    "share_velocity",
+    "share_acceleration",
+    "burst",
+    "engagement_pattern"
+  ],
+  "mae_train": 0.054,
+  "samples": [
+    "sample-001",
+    "sample-002",
+    "sample-003",
+    "sample-004",
+    "sample-005",
+    "synth-high-1",
+    "synth-high-2",
+    "synth-mid-1",
+    "synth-low-1",
+    "synth-low-2"
+  ]
+}

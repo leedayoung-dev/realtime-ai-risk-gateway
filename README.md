@@ -40,7 +40,19 @@ DATA → REAL-TIME → AI
 | 3 | LLM Gateway | Routing + Evaluation |
 | 4–6 | AI Security | Gateway → Monitoring → Agent Security |
 
-현재 진행: **Phase 1 — project-a-news-credibility**
+현재 진행: **pytest + GitHub Actions CI**
+
+## Test / CI
+
+```bash
+# 각 프로젝트에서
+cd project-d-ai-security && PYTHONPATH=. pytest -q
+cd ../project-c-llm-gateway && SECURITY_ENABLED=false PYTHONPATH=. pytest -q
+cd ../project-a-news-credibility && PYTHONPATH=. pytest -q
+cd ../project-b-fraud-detection && PYTHONPATH=. pytest -q
+```
+
+GitHub Actions: `.github/workflows/ci.yml` (push/PR 시 A~D matrix로 pytest 실행)
 
 ## License
 

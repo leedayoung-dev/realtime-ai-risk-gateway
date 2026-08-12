@@ -1,0 +1,100 @@
+{
+  "corpus": [
+    {
+      "doc_id": "ev-corp-001",
+      "evidence_type": "contradicting",
+      "source": "labor-policy-watch",
+      "keywords": ["최저임금", "동결", "정부"],
+      "snippet": "고용부는 최저임금 동결을 검토한 바 없다고 선을 그었다.",
+      "url": "https://example.com/evidence/ev-corp-001"
+    },
+    {
+      "doc_id": "ev-corp-002",
+      "evidence_type": "supporting",
+      "source": "anon-source-brief",
+      "keywords": ["최저임금", "동결", "검토"],
+      "snippet": "경제부처 관계자는 최저임금 동결 옵션이 내부 회의에서 거론됐다고 전했다.",
+      "url": "https://example.com/evidence/ev-corp-002"
+    },
+    {
+      "doc_id": "ev-corp-003",
+      "evidence_type": "official",
+      "source": "ministry-press",
+      "keywords": ["최저임금", "공식", "입장"],
+      "snippet": "관련 부처는 최저임금과 관련한 공식 입장을 추후 발표하겠다고 밝혔다.",
+      "url": "https://example.com/evidence/ev-corp-003"
+    },
+    {
+      "doc_id": "ev-corp-004",
+      "evidence_type": "contradicting",
+      "source": "pharma-review",
+      "keywords": ["임상", "3상", "신약", "효과"],
+      "snippet": "외부 연구진은 A사 임상 3상 중간 결과가 통계적으로 유의하지 않을 수 있다고 지적했다.",
+      "url": "https://example.com/evidence/ev-corp-004"
+    },
+    {
+      "doc_id": "ev-corp-005",
+      "evidence_type": "supporting",
+      "source": "company-ir",
+      "keywords": ["임상", "3상", "A사", "효과"],
+      "snippet": "A사 IR 자료는 임상 3상 1차 평가변수에서 유의미한 개선을 보고했다.",
+      "url": "https://example.com/evidence/ev-corp-005"
+    },
+    {
+      "doc_id": "ev-corp-006",
+      "evidence_type": "official",
+      "source": "regulator-note",
+      "keywords": ["허가", "신청", "임상"],
+      "snippet": "규제 당국은 해당 신약의 허가 신청 접수 여부를 확인 중이라고만 답했다.",
+      "url": "https://example.com/evidence/ev-corp-006"
+    },
+    {
+      "doc_id": "ev-corp-007",
+      "evidence_type": "official",
+      "source": "seoul-transport",
+      "keywords": ["서울시", "대중교통", "요금", "동결"],
+      "snippet": "서울시 교통본부 보도자료: 내년 대중교통 요금 동결을 확정 발표한다.",
+      "url": "https://example.com/evidence/ev-corp-007"
+    },
+    {
+      "doc_id": "ev-corp-008",
+      "evidence_type": "supporting",
+      "source": "city-budget-desk",
+      "keywords": ["요금", "동결", "예산"],
+      "snippet": "시 예산 자료에도 대중교통 요금 동결에 따른 보전 재원이 편성되어 있다.",
+      "url": "https://example.com/evidence/ev-corp-008"
+    },
+    {
+      "doc_id": "ev-corp-009",
+      "evidence_type": "contradicting",
+      "source": "power-authority",
+      "keywords": ["정전", "수도권", "전력"],
+      "snippet": "전력 당국은 수도권 대형 정전 계획이나 징후가 없다고 공식 부인했다.",
+      "url": "https://example.com/evidence/ev-corp-009"
+    },
+    {
+      "doc_id": "ev-corp-010",
+      "evidence_type": "official",
+      "source": "kepco-brief",
+      "keywords": ["정전", "확인", "당국"],
+      "snippet": "당국 브리핑: 익명 제보성 정전 정보는 확인되지 않았다.",
+      "url": "https://example.com/evidence/ev-corp-010"
+    },
+    {
+      "doc_id": "ev-corp-011",
+      "evidence_type": "official",
+      "source": "exchange-stats",
+      "keywords": ["코스피", "외국인", "순매수"],
+      "snippet": "거래소 집계상 외국인 순매수와 지수 상승이 확인된다.",
+      "url": "https://example.com/evidence/ev-corp-011"
+    },
+    {
+      "doc_id": "ev-corp-012",
+      "evidence_type": "supporting",
+      "source": "broker-note",
+      "keywords": ["코스피", "상승", "순매수"],
+      "snippet": "증권사 시황도 외국인 순매수세에 따른 소폭 상승을 동일하게 기술했다.",
+      "url": "https://example.com/evidence/ev-corp-012"
+    }
+  ]
+}

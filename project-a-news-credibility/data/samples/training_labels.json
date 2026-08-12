@@ -1,0 +1,124 @@
+{
+  "samples": [
+    {
+      "article_id": "sample-001",
+      "label_risk": 62,
+      "note": "unconfirmed wage freeze claim with contradiction"
+    },
+    {
+      "article_id": "sample-002",
+      "label_risk": 78,
+      "note": "clinical claim + high propagation + contradiction"
+    },
+    {
+      "article_id": "sample-003",
+      "label_risk": 12,
+      "note": "official announcement with official evidence"
+    },
+    {
+      "article_id": "sample-004",
+      "label_risk": 88,
+      "note": "viral unverified disaster claim"
+    },
+    {
+      "article_id": "sample-005",
+      "label_risk": 28,
+      "note": "routine market report with mild uncertainty"
+    },
+    {
+      "article_id": "synth-high-1",
+      "features": {
+        "claim_count": 5,
+        "avg_claim_confidence": 0.8,
+        "evidence_supporting": 0,
+        "evidence_contradicting": 3,
+        "evidence_official": 0,
+        "evidence_matched": 3,
+        "avg_evidence_relevance": 0.7,
+        "content_length": 220,
+        "source_trust": 0.35,
+        "share_velocity": 90,
+        "share_acceleration": 40,
+        "burst": 1,
+        "engagement_pattern": 2000
+      },
+      "label_risk": 91
+    },
+    {
+      "article_id": "synth-high-2",
+      "features": {
+        "claim_count": 4,
+        "avg_claim_confidence": 0.75,
+        "evidence_supporting": 1,
+        "evidence_contradicting": 2,
+        "evidence_official": 0,
+        "evidence_matched": 3,
+        "avg_evidence_relevance": 0.55,
+        "content_length": 160,
+        "source_trust": 0.4,
+        "share_velocity": 70,
+        "share_acceleration": 20,
+        "burst": 1,
+        "engagement_pattern": 1500
+      },
+      "label_risk": 84
+    },
+    {
+      "article_id": "synth-mid-1",
+      "features": {
+        "claim_count": 3,
+        "avg_claim_confidence": 0.65,
+        "evidence_supporting": 1,
+        "evidence_contradicting": 1,
+        "evidence_official": 1,
+        "evidence_matched": 3,
+        "avg_evidence_relevance": 0.5,
+        "content_length": 180,
+        "source_trust": 0.55,
+        "share_velocity": 20,
+        "share_acceleration": 5,
+        "burst": 0,
+        "engagement_pattern": 300
+      },
+      "label_risk": 48
+    },
+    {
+      "article_id": "synth-low-1",
+      "features": {
+        "claim_count": 2,
+        "avg_claim_confidence": 0.85,
+        "evidence_supporting": 2,
+        "evidence_contradicting": 0,
+        "evidence_official": 2,
+        "evidence_matched": 4,
+        "avg_evidence_relevance": 0.9,
+        "content_length": 200,
+        "source_trust": 0.9,
+        "share_velocity": 3,
+        "share_acceleration": 0,
+        "burst": 0,
+        "engagement_pattern": 80
+      },
+      "label_risk": 10
+    },
+    {
+      "article_id": "synth-low-2",
+      "features": {
+        "claim_count": 1,
+        "avg_claim_confidence": 0.8,
+        "evidence_supporting": 1,
+        "evidence_contradicting": 0,
+        "evidence_official": 1,
+        "evidence_matched": 2,
+        "avg_evidence_relevance": 0.85,
+        "content_length": 140,
+        "source_trust": 0.85,
+        "share_velocity": 2,
+        "share_acceleration": 0,
+        "burst": 0,
+        "engagement_pattern": 40
+      },
+      "label_risk": 8
+    }
+  ]
+}

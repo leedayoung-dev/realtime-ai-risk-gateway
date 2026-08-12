@@ -1,69 +1,49 @@
 # Project A — Real-time News Credibility Detection
 
-뉴스 기사·출처·외부 증거·확산 패턴을 실시간 분석하여 **검증 필요도(Credibility Risk)** 를 산출합니다.  
-Fake/Real 이진 분류가 목표가 아닙니다.
+뉴스 기사·출처·외부 증거·확산 패턴을 실시간 분석하여 **검증 필요도(Credibility Risk)** 를 산출합니다.
 
 PRD: [PRD-news-credibility.md](./PRD-news-credibility.md)
-
-## Pipeline
-
-```text
-News Collector → Kafka → Streaming
-  → Claim Extraction → Evidence Retrieval
-  → Feature Engineering → Feast/Redis
-  → Risk Model → FastAPI → Dashboard
-```
 
 ## Milestones
 
 | Phase | 산출물 | 상태 |
 | --- | --- | --- |
-| M1 | Collector + Kafka + Streaming 골격 | In progress |
-| M2 | Claim Extraction + Evidence Retrieval | Planned |
-| M3 | Feature Store + Risk Model | Planned |
-| M4 | FastAPI + Dashboard + Early Detection 평가 | Planned |
+| M1 | Collector + Kafka + Streaming 골격 | Done |
+| M2 | Claim Extraction + Evidence Retrieval | Done |
+| M3 | Feature Store + Risk Model | Done |
+| M4 | Dashboard + Early Detection 평가 | Done |
+| M4+ | RSS/Fixture Collect → Bus → Analyze | Done |
+| M5 | High-risk → Project C Insights push | Done |
 
-## Layout
-
-```text
-project-a-news-credibility/
-├── PRD-news-credibility.md
-├── README.md
-├── requirements.txt
-├── docker-compose.yml
-├── data/samples/
-└── src/
-    ├── collector/     # 뉴스 수집 → Kafka 발행
-    ├── streaming/     # 실시간 처리 파이프라인
-    ├── claims/        # Claim 추출
-    ├── evidence/      # 증거 수집
-    ├── features/      # Feature Engineering
-    ├── risk/          # Credibility Risk 산출
-    └── api/           # FastAPI 서빙
-```
-
-## Quick Start (M1)
+## Quick Start
 
 ```bash
-# 인프라 (Kafka, Redis)
-docker compose up -d
-
-# 의존성
-python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
-# 샘플 수집 → Kafka 발행 (로컬 스텁)
-python -m src.collector.news_collector
-
-# API (스켈레톤)
-uvicorn src.api.main:app --reload --port 8000
+PYTHONPATH=. python scripts/train_risk_model.py
+PYTHONPATH=. uvicorn src.api.main:app --reload --port 8000
 ```
 
-## API (skeleton)
+- Dashboard: http://localhost:8000/
+- API Docs: http://localhost:8000/docs
 
-| Method | Path | 설명 |
-| --- | --- | --- |
-| GET | `/health` | 헬스체크 |
-| GET | `/v1/articles/{article_id}/risk` | 기사 위험도 조회 |
-| GET | `/v1/articles/{article_id}/claims` | Claim 목록 |
+## Realtime path (Kafka optional)
+
+```text
+RSS/Fixture → Collector → Bus(Kafka|memory) → Streaming analyze → Registry/API/Dashboard
+```
+
+Kafka/Redis가 없어도 in-memory bus/feature store로 동일 흐름이 동작합니다.
+
+```bash
+# fixture 수집 + 파이프라인
+curl -X POST http://127.0.0.1:8000/v1/collect/rss \
+  -H 'Content-Type: application/json' \
+  -d '{"use_fixture": true, "run_pipeline": true}'
+```
+
+## Evaluate
+
+```bash
+PYTHONPATH=. python scripts/eval_early_detection.py 50
+```

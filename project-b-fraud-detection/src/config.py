@@ -14,5 +14,11 @@ class Settings(BaseSettings):
     feature_ttl_seconds: int = 3600
     use_ml_model: bool = True
 
+    # Project C risk insights (fail-open)
+    insight_push_enabled: bool = True
+    llm_gateway_url: str = "http://127.0.0.1:8002"
+    insight_push_threshold: float = 50.0
+    insight_push_timeout_ms: int = 2000
+
 
 settings = Settings()

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Fixture News Feed</title>
+    <link>https://example.com/feed</link>
+    <description>Offline RSS fixture for Project A collector</description>
+    <item>
+      <title>정부, 추경안 관련 비공식 논의 보도</title>
+      <link>https://example.com/rss/wage-extra</link>
+      <pubDate>Mon, 11 Aug 2026 01:00:00 GMT</pubDate>
+      <description>정부가 추경안을 비공식적으로 검토 중이라는 보도가 나왔다. 기획재정부는 확정된 바 없다고 밝혔다.</description>
+    </item>
+    <item>
+      <title>대형 유통사, 새벽배송 전국 확대 임박설</title>
+      <link>https://example.com/rss/delivery-rumor</link>
+      <pubDate>Mon, 11 Aug 2026 02:20:00 GMT</pubDate>
+      <description>익명 제보에 따르면 대형 유통사가 새벽배송을 전국으로 확대한다고 한다. 회사 측 공식 발표는 없다.</description>
+    </item>
+    <item>
+      <title>기상청, 내일 중부 집중호우 공식 주의보</title>
+      <link>https://example.com/rss/weather-official</link>
+      <pubDate>Mon, 11 Aug 2026 03:10:00 GMT</pubDate>
+      <description>기상청은 내일 중부지방 집중호우 가능성에 대해 공식 주의보를 발표했다.</description>
+    </item>
+  </channel>
+</rss>
